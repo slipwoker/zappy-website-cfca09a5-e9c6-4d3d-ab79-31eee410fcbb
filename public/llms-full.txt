@@ -2,13 +2,13 @@
 
 שלום אני אביב אני בת 9 ואני רוצה לבנות אתר בעברית בבקשה
 
-Source: https://example.com
+Source: https://hasipurshelibethailand.zappy5.app
 
 ---
 
 ## טיול משפחתי לתאילנד — הסיפור שלי בתאילנד
 
-URL: https://example.com
+URL: https://hasipurshelibethailand.zappy5.app
 Description: אביב בת ה-9 לוקחת אתכם למסע מיוחד! טיול משפחתי לתאילנד דרך עיניים של ילדה סקרנית ומלאת חיים. הצטרפו לסיפור האמיתי שלנו!
 
 טיול משפחתי לתאילנד — הסיפור שלי בתאילנד
@@ -65,6 +65,7 @@ Description: אביב בת ה-9 לוקחת אתכם למסע מיוחד! טיו�
 
 
 צור קשר
+
 
 
 
@@ -518,7 +519,7 @@ Description: אביב בת ה-9 לוקחת אתכם למסע מיוחד! טיו�
 
 ## הרגעים שיגרמו לכם לחייך מהסיפור שלנו — הסיפור שלי בתאילנד
 
-URL: https://example.com/stories-highlights
+URL: https://hasipurshelibethailand.zappy5.app/stories-highlights
 Description: כל רגע מיוחד מהטיול המשפחתי לתאילנד נשמר כאן! תמונות, זיכרונות וסיפורים שחייבים לקרוא. בואו לגלות את ההרפתקאות הכי מדהימות שחווינו יחד כמשפחה!
 
 הרגעים שיגרמו לכם לחייך מהסיפור שלנו — הסיפור שלי בתאילנד
@@ -953,7 +954,7 @@ Description: כל רגע מיוחד מהטיול המשפחתי לתאילנד �
 
 ## מי היא אביב ולמה היא כתבה את הסיפור — הסיפור שלי בתאילנד
 
-URL: https://example.com/about
+URL: https://hasipurshelibethailand.zappy5.app/about
 Description: היכירו את אביב, ילדה בת 9 שהחליטה לשתף את כל העולם בטיול המשפחתי לתאילנד! כאן תגלו מי עומד מאחורי האתר ומה הניע אותה לבנות אותו בעצמה בעברית.
 
 מי היא אביב ולמה היא כתבה את הסיפור — הסיפור שלי בתאילנד
@@ -1426,7 +1427,7 @@ Description: היכירו את אביב, ילדה בת 9 שהחליטה לשתף
 
 ## רוצים לשאול אביב על תאילנד? דברו איתה — הסיפור שלי בתאילנד
 
-URL: https://example.com/contact
+URL: https://hasipurshelibethailand.zappy5.app/contact
 Description: יש לכם שאלות על הטיול המשפחתי לתאילנד או סתם רוצים להגיד שלום לאביב? כתבו לנו עכשיו ונשמח לענות לכם על הכל! כל הודעה מתקבלת בשמחה ובאהבה.
 
 רוצים לשאול אביב על תאילנד? דברו איתה — הסיפור שלי בתאילנד
@@ -1829,7 +1830,7 @@ Description: יש לכם שאלות על הטיול המשפחתי לתאילנ�
 
 ## מדיניות פרטיות
 
-URL: https://example.com/privacy
+URL: https://hasipurshelibethailand.zappy5.app/privacy
 Description: מדיניות הפרטיות שלנו - כיצד אנו אוספים, משתמשים ומגנים על המידע שלכם
 
 מדיניות פרטיות
@@ -2085,7 +2086,7 @@ Description: מדיניות הפרטיות שלנו - כיצד אנו אוספי
 
 ## הצהרת נגישות
 
-URL: https://example.com/accessibility
+URL: https://hasipurshelibethailand.zappy5.app/accessibility
 Description: הצהרת הנגישות שלנו - מחויבותנו לנגישות דיגיטלית
 
 הצהרת נגישות
@@ -2350,7 +2351,7 @@ Description: הצהרת הנגישות שלנו - מחויבותנו לנגיש�
 
 ## תנאי שימוש
 
-URL: https://example.com/terms
+URL: https://hasipurshelibethailand.zappy5.app/terms
 Description: תנאי השימוש באתר - הזכויות והחובות של המשתמשים
 
 תנאי שימוש

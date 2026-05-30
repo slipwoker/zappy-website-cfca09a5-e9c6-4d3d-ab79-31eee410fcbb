@@ -7,33 +7,33 @@
 ## Pages
 
 ### בית
-https://example.com
+https://hasipurshelibethailand.zappy5.app
 אביב בת ה-9 לוקחת אתכם למסע מיוחד! טיול משפחתי לתאילנד דרך עיניים של ילדה סקרנית ומלאת חיים. הצטרפו לסיפור האמיתי שלנו!
 
 ### סיפורים ורגעים
-https://example.com/stories-highlights
+https://hasipurshelibethailand.zappy5.app/stories-highlights
 כל רגע מיוחד מהטיול המשפחתי לתאילנד נשמר כאן! תמונות, זיכרונות וסיפורים שחייבים לקרוא. בואו לגלות את ההרפתקאות הכי מדהימות שחווינו יחד כמשפחה!
 
 ### אודות הסיפור
-https://example.com/about
+https://hasipurshelibethailand.zappy5.app/about
 היכירו את אביב, ילדה בת 9 שהחליטה לשתף את כל העולם בטיול המשפחתי לתאילנד! כאן תגלו מי עומד מאחורי האתר ומה הניע אותה לבנות אותו בעצמה בעברית.
 
 ### צור קשר
-https://example.com/contact
+https://hasipurshelibethailand.zappy5.app/contact
 יש לכם שאלות על הטיול המשפחתי לתאילנד או סתם רוצים להגיד שלום לאביב? כתבו לנו עכשיו ונשמח לענות לכם על הכל! כל הודעה מתקבלת בשמחה ובאהבה.
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://example.com/privacy
+https://hasipurshelibethailand.zappy5.app/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://example.com/terms
+https://hasipurshelibethailand.zappy5.app/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://example.com/accessibility
+https://hasipurshelibethailand.zappy5.app/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
@@ -43,8 +43,8 @@ Information about WCAG compliance and accessibility features.
 - (No contact details configured yet.)
 
 ### Contact form
-- URL: https://example.com/contact
-- Endpoint: https://example.com/api/email/contact-form
+- URL: https://hasipurshelibethailand.zappy5.app/contact
+- Endpoint: https://hasipurshelibethailand.zappy5.app/api/email/contact-form
 - Method: POST
 - Content-Type: application/json
 - Fields:
@@ -71,6 +71,6 @@ General
 
 # Machine-readable feeds
 
-- Sitemap (XML): https://example.com/sitemap.xml
-- Robots: https://example.com/robots.txt
-- Flattened page text (for LLMs): https://example.com/llms-full.txt
+- Sitemap (XML): https://hasipurshelibethailand.zappy5.app/sitemap.xml
+- Robots: https://hasipurshelibethailand.zappy5.app/robots.txt
+- Flattened page text (for LLMs): https://hasipurshelibethailand.zappy5.app/llms-full.txt
