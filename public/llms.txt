@@ -1,0 +1,76 @@
+# הסיפור שלי בתאילנד — Generative Engine Optimization Map
+
+> שלום אני אביב אני בת 9 ואני רוצה לבנות אתר בעברית בבקשה
+
+---
+
+## Pages
+
+### בית
+https://example.com
+אביב בת ה-9 לוקחת אתכם למסע מיוחד! טיול משפחתי לתאילנד דרך עיניים של ילדה סקרנית ומלאת חיים. הצטרפו לסיפור האמיתי שלנו!
+
+### סיפורים ורגעים
+https://example.com/stories-highlights
+כל רגע מיוחד מהטיול המשפחתי לתאילנד נשמר כאן! תמונות, זיכרונות וסיפורים שחייבים לקרוא. בואו לגלות את ההרפתקאות הכי מדהימות שחווינו יחד כמשפחה!
+
+### אודות הסיפור
+https://example.com/about
+היכירו את אביב, ילדה בת 9 שהחליטה לשתף את כל העולם בטיול המשפחתי לתאילנד! כאן תגלו מי עומד מאחורי האתר ומה הניע אותה לבנות אותו בעצמה בעברית.
+
+### צור קשר
+https://example.com/contact
+יש לכם שאלות על הטיול המשפחתי לתאילנד או סתם רוצים להגיד שלום לאביב? כתבו לנו עכשיו ונשמח לענות לכם על הכל! כל הודעה מתקבלת בשמחה ובאהבה.
+
+## Legal & Policy
+
+### Privacy Policy
+https://example.com/privacy
+Information about how user data is collected, stored, and protected.
+
+### Terms & Conditions
+https://example.com/terms
+Legal terms describing service usage, rights, and policies.
+
+### Accessibility Statement
+https://example.com/accessibility
+Information about WCAG compliance and accessibility features.
+
+---
+
+## How to Contact Us
+
+- (No contact details configured yet.)
+
+### Contact form
+- URL: https://example.com/contact
+- Endpoint: https://example.com/api/email/contact-form
+- Method: POST
+- Content-Type: application/json
+- Fields:
+  - `name` (text, required)
+  - `email` (email, required)
+  - `phone` (tel)
+  - `message` (textarea, required)
+  - `privacy_consent` (checkbox, required)
+
+---
+
+# Business Context (for LLM understanding)
+
+## About הסיפור שלי בתאילנד
+שלום אני אביב אני בת 9 ואני רוצה לבנות אתר בעברית בבקשה
+
+## Target Audience
+- משפחות בחופשה
+
+## Industry
+General
+
+---
+
+# Machine-readable feeds
+
+- Sitemap (XML): https://example.com/sitemap.xml
+- Robots: https://example.com/robots.txt
+- Flattened page text (for LLMs): https://example.com/llms-full.txt

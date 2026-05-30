@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>טיול משפחתי לתאילנד — הסיפור שלי בתאילנד</title>
+    <meta name="description" content="אביב בת ה-9 לוקחת אתכם למסע מיוחד! טיול משפחתי לתאילנד דרך עיניים של ילדה סקרנית ומלאת חיים. הצטרפו לסיפור האמיתי שלנו!">
+    <meta name="keywords" content="טיול משפחתי לתאילנד, אתר ילדים בעברית, תאילנד עם ילדים, סיפורי טיול">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: 'cfca09a5-e9c6-4d3d-ab79-31eee410fcbb',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+    <meta property="og:title" content="טיול משפחתי לתאילנד — הסיפור שלי בתאילנד">
+    <meta property="og:description" content="אביב בת ה-9 לוקחת אתכם למסע מיוחד! טיול משפחתי לתאילנד דרך עיניים של ילדה סקרנית ומלאת חיים. הצטרפו לסיפור האמיתי שלנו!">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="טיול משפחתי לתאילנד — הסיפור שלי בתאילנד">
+    <meta name="twitter:description" content="אביב בת ה-9 לוקחת אתכם למסע מיוחד! טיול משפחתי לתאילנד דרך עיניים של ילדה סקרנית ומלאת חיים. הצטרפו לסיפור האמיתי שלנו!">
+    <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .skip-link { position: absolute; top: 0; left: 0; transform: translateY(-200%); padding: 12px 18px; background: var(--bg-dark, #1a1a1a); color: var(--text-light, #fff); font-weight: 600; border-radius: 0 0 8px 0; z-index: 10000; }
+    .skip-link:focus { transform: none; outline: 2px solid var(--ring, #fff); outline-offset: 2px; }
+    :focus-visible { outline: 2px solid var(--ring, currentColor); outline-offset: 3px; }
+  </style>
+
+
+  
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css">
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+    <script>window.ZAPPY_WEBSITE_ID = "cfca09a5-e9c6-4d3d-ab79-31eee410fcbb"; window.ZAPPY_API_BASE = "https://api.zappy5.com";</script>
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: var(--text-dark, #333) !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu .zappy-nav-child > a { padding-left: 28px !important; font-size: 0.9em !important; opacity: 0.85 !important; }
+      [dir="rtl"] .sub-menu .zappy-nav-child > a, html[lang="he"] .sub-menu .zappy-nav-child > a, html[lang="ar"] .sub-menu .zappy-nav-child > a { padding-left: 10px !important; padding-right: 28px !important; }
+      .sub-menu .zappy-nav-parent > a { font-weight: 600 !important; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus (exclude catalog sub-menus that use <a> children instead of <li>) */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))):not(:has(> a)), .sub-menu:not(:has(li)):not(:has(> a)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .navbar .sub-menu.mobile-expanded, .nav-menu .sub-menu.mobile-expanded, #navMenu .sub-menu.mobile-expanded { max-height: none !important; overflow-y: visible !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; position: relative !important; min-height: 44px !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; min-width: 0 !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; min-width: 0 !important; padding: 0 !important; line-height: inherit !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu, .navbar li:has(.sub-menu) > .sub-menu, #navMenu li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: auto !important; background: transparent !important; border: none !important; cursor: pointer !important; color: var(--text-dark) !important; position: static !important; flex-shrink: 0 !important; align-self: stretch !important; z-index: 2 !important; padding: 0 !important; margin: 0 !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; color: var(--text-dark) !important; white-space: normal !important; }
+        .sub-menu .zappy-nav-child > a { padding-left: 28px !important; font-size: 0.9em !important; opacity: 0.85 !important; }
+        [dir="rtl"] .sub-menu .zappy-nav-child > a, html[lang="he"] .sub-menu .zappy-nav-child > a, html[lang="ar"] .sub-menu .zappy-nav-child > a { padding-left: 0 !important; padding-right: 28px !important; }
+        .sub-menu .zappy-nav-parent > a { font-weight: 600 !important; }
+        .nav-menu.active, #navMenu.active { max-width: 100vw !important; overflow-x: hidden !important; box-sizing: border-box !important; }
+        .navbar .sub-menu li a, nav.navbar .sub-menu li a, .zappy-products-dropdown .sub-menu a { color: var(--text-dark) !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+
+    <style id="zappy-widget-visibility">
+      html[dir="rtl"] .whatsapp-float { right: 20px !important; left: auto !important; }
+      html[dir="ltr"] .whatsapp-float, html:not([dir]) .whatsapp-float { left: 20px !important; right: auto !important; }
+      html[dir="rtl"] #mic-access-tool-general-button, html[dir="rtl"] .mic-access-tool-general-button,
+      html[dir="rtl"] #mic-init-access-tool .mic-access-tool-general-button,
+      html[dir="rtl"] #mic-init-access-tool #mic-access-tool-general-button,
+      html[dir="rtl"] ._access-icon { left: 20px !important; right: auto !important; }
+      html[dir="ltr"] #mic-access-tool-general-button, html[dir="ltr"] .mic-access-tool-general-button,
+      html[dir="ltr"] #mic-init-access-tool .mic-access-tool-general-button,
+      html[dir="ltr"] #mic-init-access-tool #mic-access-tool-general-button,
+      html[dir="ltr"] ._access-icon,
+      html:not([dir]) #mic-access-tool-general-button, html:not([dir]) .mic-access-tool-general-button,
+      html:not([dir]) #mic-init-access-tool .mic-access-tool-general-button,
+      html:not([dir]) #mic-init-access-tool #mic-access-tool-general-button,
+      html:not([dir]) ._access-icon { right: 20px !important; left: auto !important; }
+      @media (max-width: 768px) { .whatsapp-float { display: flex !important; } }
+      @media (min-width: 769px) { .whatsapp-float { display: flex !important; } }
+      @media (max-width: 768px) {
+        #mic-access-tool-general-button, .mic-access-tool-general-button,
+        #mic-init-access-tool .mic-access-tool-general-button, #mic-init-access-tool #mic-access-tool-general-button,
+        ._access-icon { display: flex !important; visibility: visible !important; opacity: 1 !important; pointer-events: auto !important; }
+        #mic-access-tool-box.opened-mic-access-tool, .mic-access-tool-box.opened-mic-access-tool,
+        #mic-init-access-tool #mic-access-tool-box.opened-mic-access-tool {
+          visibility: visible !important; opacity: 1 !important; pointer-events: auto !important;
+        }
+      }
+      @media (min-width: 769px) {
+        #mic-access-tool-general-button, .mic-access-tool-general-button,
+        #mic-init-access-tool .mic-access-tool-general-button, #mic-init-access-tool #mic-access-tool-general-button,
+        ._access-icon { display: flex !important; visibility: visible !important; opacity: 1 !important; pointer-events: auto !important; }
+        #mic-access-tool-box.opened-mic-access-tool, .mic-access-tool-box.opened-mic-access-tool,
+        #mic-init-access-tool #mic-access-tool-box.opened-mic-access-tool {
+          visibility: visible !important; opacity: 1 !important; pointer-events: auto !important;
+        }
+      }
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#main">דלג לתוכן הראשי</a>
+  <nav class="navbar" dir="rtl">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+
+  <button class="phone-header-btn" data-phone="[business_phone]" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+
+  <div class="nav-container">
+    <div class="nav-right-group"><div class="nav-brand">
+      <a href="/" class="logo-link"><img class="logo" src="/assets/site-----image-1.webp" alt="הסיפור שלי בתאילנד"></a>
+    </div><ul class="nav-menu" id="navMenu"><li><a href="/">בית</a></li><li><a href="/stories-highlights">סיפורים ורגעים</a></li><li><a href="/about">אודות הסיפור</a></li></ul></div>
+
+    
+
+    <div class="nav-cta-container">
+      <a href="/contact" class="nav-cta-btn">צור קשר</a>
+    </div>
+  </div>
+</nav>
+<script>
+
+// Navbar Mobile Menu Toggle and Contrast Fix
+(function() {
+  // Use 'load' event instead of 'DOMContentLoaded' to ensure we run AFTER all other scripts
+  window.addEventListener('load', function() {
+    
+    // FIX MOBILE BUTTON CONTRAST
+    // Detect navbar background color and apply contrasting color to mobile buttons
+    const navbar = document.querySelector('.navbar, nav, header');
+    if (!navbar) {
+      console.log('[Navbar] Navbar element not found');
+      return;
+    }
+    
+    // DECLARE VARIABLES EARLY to avoid Temporal Dead Zone errors
+    // These are used in multiple places below
+    let mobileToggle = document.getElementById('mobileToggle') ||
+                       document.querySelector('.mobile-toggle') ||
+                       document.querySelector('.hamburger') ||
+                       document.querySelector('.hamburger-menu') ||
+                       document.querySelector('.menu-toggle') ||
+                       document.querySelector('.burger-menu') ||
+                       document.querySelector('[aria-label="Menu"]') ||
+                       document.querySelector('[aria-label="תפריט"]');
+    
+    const phoneBtn = document.querySelector('.phone-header-btn');
+    
+    const computedStyle = window.getComputedStyle(navbar);
+    let bgColor = computedStyle.backgroundColor;
+    
+    console.log('[Navbar] Initial navbar background:', bgColor);
+    
+    // Check if background is transparent or rgba with 0 alpha
+    const isTransparent = bgColor === 'transparent' || 
+                         bgColor === 'rgba(0, 0, 0, 0)' ||
+                         (bgColor.startsWith('rgba') && bgColor.includes(', 0)'));
+    
+    if (isTransparent) {
+      // Check for background-image or gradient
+      const bgImage = computedStyle.backgroundImage;
+      if (bgImage && bgImage !== 'none') {
+        console.log('[Navbar] Navbar has background image/gradient, using dark text');
+        bgColor = 'rgb(240, 240, 240)'; // Assume light background
+      } else {
+        // Transparent navbar - check body background
+        const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+        console.log('[Navbar] Navbar transparent, using body background:', bodyBg);
+        bgColor = bodyBg;
+      }
+    }
+    
+    // Calculate luminance to determine if background is light or dark
+    const rgb = bgColor.match(/\d+/g);
+    if (rgb && rgb.length >= 3) {
+      const r = parseInt(rgb[0]);
+      const g = parseInt(rgb[1]);
+      const b = parseInt(rgb[2]);
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+      
+      // Mobile button colors are set by Claude's AI-generated CSS (same as .nav-menu a)
+      // No dynamic color overrides needed - colors come from the generated navbar CSS
+      console.log('[Navbar] Mobile button colors preserved from Claude CSS (luminance:', luminance.toFixed(2) + ')');
+      
+      // FIX ICON SIZES - Ensure SVGs are properly sized and visible
+      // INJECT CRITICAL CSS TO OVERRIDE ANY CONFLICTING RULES
+      const criticalCSS = document.createElement('style');
+      criticalCSS.id = 'zappy-mobile-nav-fix';
+      const htmlLang = document.documentElement.lang || 'en';
+      const htmlDir = document.documentElement.dir || 'ltr';
+      // Check both dir attribute AND lang for RTL detection
+      // dir="rtl" is the most reliable indicator
+      const isRTL = htmlDir === 'rtl' || htmlLang === 'he' || htmlLang === 'ar';
+      
+      criticalCSS.textContent = `
+        /* Hide mobile buttons on desktop, show only on mobile */
+        @media (min-width: 769px) {
+          .mobile-toggle,
+          .phone-header-btn {
+            display: none !important;
+          }
+        }
+        
+        /* Show and position mobile buttons correctly on mobile */
+        @media (max-width: 768px) {
+          .navbar,
+          nav.navbar {
+            min-height: 70px !important;
+          }
+
+          .mobile-toggle,
+          .phone-header-btn {
+            position: absolute !important;
+            top: 0 !important;
+            bottom: 0 !important;
+            margin-top: auto !important;
+            margin-bottom: auto !important;
+            transform: none !important;
+            z-index: 1001 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 36px !important;
+            height: 36px !important;
+            border-radius: 50% !important;
+            border: none !important;
+            cursor: pointer !important;
+            padding: 6px !important;
+            background: none !important;
+            color: var(--nav-text, var(--text-dark)) !important;
+            touch-action: manipulation !important;
+            -webkit-tap-highlight-color: transparent !important;
+          }
+
+          html[data-zappy-site-type="ecommerce"] .phone-header-btn,
+          body[data-zappy-site-type="ecommerce"] .phone-header-btn,
+          html[data-zappy-site-type="ecommerce"] header .phone-header-btn,
+          html[data-zappy-site-type="ecommerce"] nav .phone-header-btn {
+            display: none !important;
+            visibility: hidden !important;
+            width: 0 !important;
+            height: 0 !important;
+            min-width: 0 !important;
+            overflow: hidden !important;
+          }
+          
+          /* LTR positioning (default): hamburger LEFT, phone RIGHT */
+          html:not([dir="rtl"]):not([lang="he"]):not([lang="ar"]) .mobile-toggle,
+          html[dir="ltr"] .mobile-toggle {
+            left: 12px !important;
+            right: auto !important;
+          }
+          html:not([dir="rtl"]):not([lang="he"]):not([lang="ar"]) .phone-header-btn,
+          html[dir="ltr"] .phone-header-btn {
+            right: 12px !important;
+            left: auto !important;
+          }
+          
+          /* RTL positioning: hamburger RIGHT, phone LEFT */
+          html[dir="rtl"] .mobile-toggle,
+          html[lang="he"] .mobile-toggle,
+          html[lang="ar"] .mobile-toggle {
+            right: 12px !important;
+            left: auto !important;
+          }
+          html[dir="rtl"] .phone-header-btn,
+          html[lang="he"] .phone-header-btn,
+          html[lang="ar"] .phone-header-btn {
+            left: 12px !important;
+            right: auto !important;
+          }
+          
+          /* CRITICAL: Ensure nav-container has min-height on mobile */
+          /* All children are positioned absolutely/fixed on mobile, so height:auto collapses to 0 */
+          .nav-container {
+            min-height: 70px !important;
+            position: relative !important;
+          }
+          
+          /* Ensure SVG icons are properly sized and inherit color */
+          .mobile-toggle svg,
+          .phone-header-btn svg {
+            width: 24px !important;
+            height: 24px !important;
+            /* Don't force display - let JavaScript control hamburger/close toggle */
+          }
+          
+          /* Reset nav-cta-container on mobile - remove desktop box-shadow/padding */
+          /* that creates a visible ghost box when CTA button is hidden */
+          .nav-cta-container {
+            box-shadow: none !important;
+            padding: 0 !important;
+          }
+          
+          /* Hide nav-cta-container entirely on mobile when there's no lang-switcher */
+          /* (only the CTA button is inside, and it's hidden on mobile) */
+          .nav-cta-container:not(:has(.lang-switcher)) {
+            display: none !important;
+          }
+          
+          /* CRITICAL: Prevent hero image fade gradient from bleeding over headline text */
+          /* The .image-fade-gradient has bottom: -30px (extends below parent) */
+          /* On mobile stacked layout, this overlaps the h1 text below the image */
+          .hero-image-column {
+            overflow: hidden !important;
+          }
+          .image-fade-gradient {
+            bottom: 0 !important;
+          }
+          
+          /* Hide desktop language switcher on mobile - hamburger menu handles it */
+          /* High specificity to override stored CSS */
+          .lang-switcher,
+          .nav-cta-container .lang-switcher,
+          .nav-container .lang-switcher,
+          .navbar .lang-switcher,
+          .navbar .nav-cta-container .lang-switcher {
+            display: none !important;
+          }
+        }
+      `;
+      
+      // Remove existing fix if present and inject new one
+      const existing = document.getElementById('zappy-mobile-nav-fix');
+      if (existing) existing.remove();
+      document.head.appendChild(criticalCSS);
+      
+      console.log('[Navbar] Critical CSS injected for mobile nav positioning');
+      
+      // ONLY apply inline positioning styles on mobile viewport
+      // On desktop, the CSS handles hiding these buttons with display: none
+      // Inline styles were breaking desktop layout by overriding CSS
+      const isMobileViewport = window.innerWidth <= 768;
+      
+      if (mobileToggle) {
+        // Icon sizing applies to all viewports for consistency
+        const hamburgerIcon = mobileToggle.querySelector('.hamburger-icon');
+        const closeIcon = mobileToggle.querySelector('.close-icon');
+        
+        if (hamburgerIcon) {
+          hamburgerIcon.style.setProperty('width', '24px', 'important');
+          hamburgerIcon.style.setProperty('height', '24px', 'important');
+          hamburgerIcon.style.setProperty('display', 'block', 'important'); // Show hamburger by default
+        }
+        if (closeIcon) {
+          closeIcon.style.setProperty('width', '24px', 'important');
+          closeIcon.style.setProperty('height', '24px', 'important');
+          closeIcon.style.setProperty('display', 'none', 'important'); // Hide close icon by default
+        }
+        
+        // ONLY set positioning inline styles on mobile
+        if (isMobileViewport) {
+          mobileToggle.style.setProperty('position', 'absolute', 'important');
+          mobileToggle.style.setProperty('top', '0', 'important');
+          mobileToggle.style.setProperty('bottom', '0', 'important');
+          mobileToggle.style.setProperty('margin-top', 'auto', 'important');
+          mobileToggle.style.setProperty('margin-bottom', 'auto', 'important');
+          mobileToggle.style.setProperty('transform', 'none', 'important');
+          mobileToggle.style.setProperty('z-index', '1001', 'important');
+          
+          // Clear any inline left/right so CSS can take over based on html[dir]
+          mobileToggle.style.removeProperty('left');
+          mobileToggle.style.removeProperty('right');
+          
+          console.log('[Navbar] Mobile toggle positioning applied (mobile viewport)');
+        } else {
+          // On desktop, clear any positioning styles to let CSS handle it
+          mobileToggle.style.removeProperty('position');
+          mobileToggle.style.removeProperty('top');
+          mobileToggle.style.removeProperty('transform');
+          mobileToggle.style.removeProperty('z-index');
+          mobileToggle.style.removeProperty('left');
+          mobileToggle.style.removeProperty('right');
+          console.log('[Navbar] Desktop viewport - cleared mobile toggle inline positioning');
+        }
+      }
+      
+      if (phoneBtn) {
+        // Icon sizing applies to all viewports
+        const phoneIcon = phoneBtn.querySelector('svg');
+        if (phoneIcon) {
+          phoneIcon.style.width = '24px';
+          phoneIcon.style.height = '24px';
+          phoneIcon.setAttribute('width', '24');
+          phoneIcon.setAttribute('height', '24');
+        }
+        
+        // ONLY set positioning inline styles on mobile
+        if (isMobileViewport) {
+          phoneBtn.style.setProperty('position', 'absolute', 'important');
+          phoneBtn.style.setProperty('top', '0', 'important');
+          phoneBtn.style.setProperty('bottom', '0', 'important');
+          phoneBtn.style.setProperty('margin-top', 'auto', 'important');
+          phoneBtn.style.setProperty('margin-bottom', 'auto', 'important');
+          phoneBtn.style.setProperty('transform', 'none', 'important');
+          phoneBtn.style.setProperty('z-index', '1001', 'important');
+          
+          // Clear any inline left/right so CSS can take over based on html[dir]
+          phoneBtn.style.removeProperty('left');
+          phoneBtn.style.removeProperty('right');
+          
+          console.log('[Navbar] Phone button positioning applied (mobile viewport)');
+        } else {
+          // On desktop, clear any positioning styles to let CSS handle it
+          phoneBtn.style.removeProperty('position');
+          phoneBtn.style.removeProperty('top');
+          phoneBtn.style.removeProperty('transform');
+          phoneBtn.style.removeProperty('z-index');
+          phoneBtn.style.removeProperty('left');
+          phoneBtn.style.removeProperty('right');
+          console.log('[Navbar] Desktop viewport - cleared phone button inline positioning');
+        }
+      }
+    } else {
+      console.log('[Navbar] Could not parse background color:', bgColor);
+    }
+    
+    // MOBILE MENU TOGGLE
+    // Re-query in case DOM changed (mobileToggle already declared at top of function)
+    mobileToggle = document.getElementById('mobileToggle') ||
+                   document.querySelector('.mobile-toggle') ||
+                   document.querySelector('.hamburger') ||
+                   document.querySelector('.hamburger-menu') ||
+                   document.querySelector('.menu-toggle') ||
+                   document.querySelector('.burger-menu') ||
+                   document.querySelector('[aria-label="Menu"]') ||
+                   document.querySelector('[aria-label="תפריט"]');
+    
+    // EXPANDED SEARCH: Find nav menu by ID or class
+    const navMenu = document.getElementById('navMenu') ||
+                  document.querySelector('.nav-menu') ||
+                  document.querySelector('.nav-links') ||
+                  document.querySelector('nav ul:not(.submenu)');
+    
+    if (!mobileToggle || !navMenu) {
+      console.log('[Navbar] Mobile toggle or menu not found:', { toggle: !!mobileToggle, menu: !!navMenu });
+      return;
+    }
+    
+    // Ensure navMenu has ID for CSS targeting
+    if (!navMenu.id) {
+      navMenu.id = 'navMenu';
+    }
+    
+    console.log('[Navbar] Initializing mobile menu...');
+    
+    // Remove any existing event listeners by cloning the button
+    const newToggle = mobileToggle.cloneNode(true);
+    mobileToggle.parentNode.replaceChild(newToggle, mobileToggle);
+    
+    // Toggle menu handler (shared by click and touchend)
+    function handleToggle(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const hamburgerIcon = newToggle.querySelector('.hamburger-icon');
+      const closeIcon = newToggle.querySelector('.close-icon');
+      const isActive = navMenu.classList.contains('active');
+      
+      if (isActive) {
+        // Close menu
+        navMenu.classList.remove('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'block', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'none', 'important');
+        document.body.style.overflow = '';
+        console.log('[Navbar] Menu closed');
+      } else {
+        // Open menu
+        navMenu.classList.add('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'none', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'block', 'important');
+        document.body.style.overflow = 'hidden';
+        console.log('[Navbar] Menu opened');
+      }
+    }
+    
+    // Use click for desktop/emulation and touchend as iOS Safari fallback.
+    // Prevent double-fire with a timestamp guard.
+    var lastToggleTime = 0;
+    function guardedToggle(e) {
+      var now = Date.now();
+      if (now - lastToggleTime < 300) return;
+      lastToggleTime = now;
+      handleToggle(e);
+    }
+    
+    newToggle.addEventListener('click', guardedToggle);
+    newToggle.addEventListener('touchend', guardedToggle);
+    
+    // Close menu when clicking nav links (but NOT dropdown toggles)
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        // Don't close if it's a dropdown child (unless it's a real navigation link)
+        if (this.getAttribute('href') === '#') return;
+        
+        const hamburgerIcon = newToggle.querySelector('.hamburger-icon');
+        const closeIcon = newToggle.querySelector('.close-icon');
+        
+        navMenu.classList.remove('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'block', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'none', 'important');
+        document.body.style.overflow = '';
+        console.log('[Navbar] Menu closed (link clicked)');
+      });
+    });
+    
+    // DROPDOWN MENU TOGGLE (for mobile and touch devices)
+    var dropdownToggles = navMenu.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(function(toggle) {
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var parent = this.closest('.nav-dropdown');
+        if (!parent) return;
+        
+        // Close other open dropdowns at the same level
+        var siblings = parent.parentNode.querySelectorAll('.nav-dropdown.open');
+        siblings.forEach(function(sib) {
+          if (sib !== parent) sib.classList.remove('open');
+        });
+        
+        parent.classList.toggle('open');
+        console.log('[Navbar] Dropdown toggled:', parent.classList.contains('open') ? 'open' : 'closed');
+      });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-dropdown')) {
+        var openDropdowns = document.querySelectorAll('.nav-dropdown.open');
+        openDropdowns.forEach(function(dd) { dd.classList.remove('open'); });
+      }
+    });
+    
+    console.log('[Navbar] Dropdown handlers initialized for ' + dropdownToggles.length + ' dropdowns');
+    
+    // Phone button functionality (phoneBtn already declared at top of function)
+    if (phoneBtn) {
+      phoneBtn.addEventListener('click', function() {
+        // Get phone number from placeholder in page or use default
+        const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+        const phoneNumber = phoneLinks.length > 0 
+          ? phoneLinks[0].getAttribute('href').replace('tel:', '')
+          : '[business_phone]';
+        
+        window.location.href = 'tel:' + phoneNumber;
+        console.log('[Navbar] Phone button clicked');
+      });
+    }
+    
+    console.log('[Navbar] Mobile menu initialized successfully');
+    
+    // WhatsApp button visibility is now controlled via CSS (siteSettings).
+    // No JS-based desktop hiding — the button is visible on both mobile and desktop by default.
+  });
+})();
+
+</script>
+  
+  <main id="main">
+    <section data-band-index="0" class="index-hero-section" data-layout-spec="בית-hero" dir="rtl" data-hero-type="fullscreen-scrim">
+  <!-- Background Image -->
+  <div class="index-hero-bg">
+    <img loading="eager" fetchpriority="high" data-hero-bg="true" data-placeholder="index-hero-image-1" data-context="Warm cinematic travel photography of a happy Israeli family with a young girl around age 9 walking along a lush tropical resort pathway in Thailand, palm trees and turquoise water visible in background, golden hour light, soft bokeh, beach resort atmosphere, warm terracotta and sandy tones" width="1200" height="700" src="/assets/site-index-hero-image-1.webp" alt="משפחה מטיילת בתאילנד על שביל ירוק ליד הים">
+  </div>
+
+  <!-- Scrim Overlay -->
+  <div class="index-hero-scrim" aria-hidden="true"></div>
+
+  <!-- Content Card -->
+  <div class="index-hero-container">
+    <article class="index-hero-card">
+
+      <!-- Sun Accent Motif -->
+      <div class="index-hero-sun-accent" aria-hidden="true">
+        <svg data-no-icon-edit="true" aria-hidden="true" width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="19" cy="19" r="7" stroke="#F2A65A" stroke-width="2" fill="none"></circle>
+          <line x1="19" y1="2" x2="19" y2="7" stroke="#F2A65A" stroke-width="2" stroke-linecap="round"></line>
+          <line x1="19" y1="31" x2="19" y2="36" stroke="#F2A65A" stroke-width="2" stroke-linecap="round"></line>
+          <line x1="2" y1="19" x2="7" y2="19" stroke="#F2A65A" stroke-width="2" stroke-linecap="round"></line>
+          <line x1="31" y1="19" x2="36" y2="19" stroke="#F2A65A" stroke-width="2" stroke-linecap="round"></line>
+          <line x1="6.1" y1="6.1" x2="9.6" y2="9.6" stroke="#F2A65A" stroke-width="2" stroke-linecap="round"></line>
+          <line x1="28.4" y1="28.4" x2="31.9" y2="31.9" stroke="#F2A65A" stroke-width="2" stroke-linecap="round"></line>
+          <line x1="31.9" y1="6.1" x2="28.4" y2="9.6" stroke="#F2A65A" stroke-width="2" stroke-linecap="round"></line>
+          <line x1="9.6" y1="28.4" x2="6.1" y2="31.9" stroke="#F2A65A" stroke-width="2" stroke-linecap="round"></line>
+        </svg>
+      </div>
+
+      <div class="index-hero-card-inner">
+        <span class="index-hero-label">הסיפור שלי</span>
+        <h1 class="index-hero-h1">הטיול המשפחתי שלנו<br>לתאילנד 🌴</h1>
+        <h3 class="index-hero-subtitle">שלום! אני אביב, בת תשע, וזה הסיפור שלי על הטיול הכי מדהים שעשינו — חולות לבנים, מקדשים צבעוניים ואוכל חריף מדי 😄</h3>
+        <div class="index-hero-ctas">
+          <a href="#stories" class="index-hero-btn-primary">קראו את הסיפורים שלי</a>
+          <a href="#contact" class="index-hero-btn-secondary">רוצים לשאול משהו?</a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- Bottom Divider: torn paper wave to light section -->
+  <div class="index-hero-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,72 L0,38 Q30,32 60,38 T120,34 Q160,38 200,32 T280,36 Q320,32 370,38 T450,34 Q490,40 540,33 T620,37 Q660,32 710,38 T790,34 Q840,40 890,33 T970,37 Q1010,32 1060,38 T1140,34 Q1170,38 1200,36 L1200,72 Z" fill="#FAF7F2"></path>
+    </svg>
+  </div>
+</section>
+
+<section data-band-index="1" class="index-story-intro-section" data-layout-spec="בית-story-intro" dir="rtl">
+  <!-- Grain texture overlay -->
+  <div class="story-grain-overlay" aria-hidden="true"></div>
+
+  <div class="story-container">
+    <!-- Text Column (START = RIGHT in RTL) -->
+    <div class="story-text-col">
+      <!-- Doodle accent -->
+      <div class="story-doodle-line" aria-hidden="true">
+        <svg data-no-icon-edit="true" aria-hidden="true" width="80" height="18" viewBox="0 0 80 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2,9 Q10,3 20,9 T40,9 T60,9 T78,9" stroke="#6F8FAF" stroke-width="2" stroke-linecap="round" fill="none"></path>
+        </svg>
+      </div>
+
+      <h2 class="story-heading">הסיפור שלי מתאילנד</h2>
+      <p class="story-intro-text">שלום! אני אביב, בת תשע, ואני רוצה לספר לכם על הטיול המשפחתי הכי מיוחד שהיה לי — <strong>טיול משפחתי לתאילנד</strong>. ראיתי דברים שמעולם לא חלמתי, אכלתי אוכל חדש, ופגשתי פילים! כל יום היה כמו הרפתקה חדשה ישר מתוך ספר.</p>
+
+      <!-- Memory Cards -->
+      <div class="story-memory-cards">
+        <article class="memory-card">
+          <div class="memory-card-icon" aria-hidden="true">
+            <svg data-element-type="icon" data-icon-type="svg" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 3C8.477 3 4 7.477 4 13C4 18.523 8.477 23 14 23C19.523 23 24 18.523 24 13C24 7.477 19.523 4 14 3Z" stroke="currentColor" stroke-width="1.8" fill="none"></path>
+              <path d="M14 7V13L18 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+              <circle cx="14" cy="24.5" r="1" fill="currentColor"></circle>
+              <circle cx="10" cy="25" r="1" fill="currentColor"></circle>
+              <circle cx="18" cy="25" r="1" fill="currentColor"></circle>
+            </svg>
+          </div>
+          <div class="memory-card-content">
+            <h3>המקומות שאהבתי הכי הרבה</h3>
+            <p>חופי חול לבן, מקדשים עם פסלי זהב, ושוק צף על המים — כל פינה הייתה כמו ציור.</p>
+          </div>
+        </article>
+
+        <article class="memory-card">
+          <div class="memory-card-icon" aria-hidden="true">
+            <svg data-element-type="icon" data-icon-type="svg" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 4L16.5 10H23L17.5 14L19.5 21L14 17L8.5 21L10.5 14L5 10H11.5L14 4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"></path>
+            </svg>
+          </div>
+          <div class="memory-card-content">
+            <h3>רגעים משפחתיים לא נשכחים</h3>
+            <p>אמא ואבא ואני יחד על סירה קטנה, שקיעה כתומה, וצחוק שלא נגמר — זה הרגע שהכי אהבתי.</p>
+          </div>
+        </article>
+
+        <article class="memory-card">
+          <div class="memory-card-icon" aria-hidden="true">
+            <svg data-element-type="icon" data-icon-type="svg" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 20C8 20 6 14 10 10C14 6 18 8 20 12C22 16 20 20 20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"></path>
+              <path d="M12 20C12 20 12 16 14 14C16 12 18 13 18 16V20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"></path>
+              <ellipse cx="14" cy="20.5" rx="7" ry="2" stroke="currentColor" stroke-width="1.5" fill="none"></ellipse>
+            </svg>
+          </div>
+          <div class="memory-card-content">
+            <h3>הפתעות שלא ציפיתי להן</h3>
+            <p>פילים שאפשר לרחוץ, פרפרים צבעוניים שנחתו עלי, ואוכל מתוק שטעמתי בפעם הראשונה בחיי!</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- Invite to scroll -->
+      <p class="story-scroll-invite">גללו למטה לגלות עוד מהסיפור שלי ✨</p>
+    </div>
+
+    <!-- Image Column (END = LEFT in RTL) -->
+    <div class="story-image-col">
+      <!-- Main photo tile -->
+      <figure class="story-main-tile">
+        <img loading="lazy" decoding="async" data-placeholder="index-story-intro-image-1" data-context="A joyful 9-year-old Israeli girl named Aviv smiling on a white sand beach in Thailand, wearing a colorful sundress, turquoise water in background, warm golden hour light, postcard-style photo with soft warm tones" width="520" height="360" src="/assets/site-index-story-intro-image-1.webp" alt="אביב על חוף בתאילנד">
+        <!-- Postcard tape decoration -->
+        <div class="postcard-tape postcard-tape-tr" aria-hidden="true"></div>
+        <div class="postcard-tape postcard-tape-bl" aria-hidden="true"></div>
+        <figcaption class="story-photo-caption">תאילנד 2024 🌺</figcaption>
+      </figure>
+
+      <!-- Backplate secondary tile -->
+      <figure class="story-back-tile">
+        <img loading="lazy" decoding="async" data-placeholder="index-story-intro-image-2" data-context="A family photo of a young Israeli girl and her parents feeding or petting an elephant in Chiang Mai Thailand, lush green jungle background, warm candid travel photography style" width="300" height="220" src="/assets/site-index-story-intro-image-2.webp" alt="אביב עם פיל בתאילנד">
+        <div class="postcard-tape postcard-tape-tr" aria-hidden="true"></div>
+      </figure>
+
+      <!-- Tropical leaf decoration -->
+      <svg data-no-icon-edit="true" aria-hidden="true" class="story-leaf-deco" width="120" height="140" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20,130 C20,130 10,80 40,50 C60,28 90,20 100,10" stroke="#7A8B5A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.55"></path>
+        <path d="M40,50 C50,60 30,75 20,130" stroke="#7A8B5A" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.4"></path>
+        <path d="M60,35 C55,50 45,58 40,50" stroke="#7A8B5A" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.45"></path>
+        <path d="M75,25 C68,42 55,48 45,45" stroke="#7A8B5A" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.4"></path>
+        <path d="M90,15 C80,35 65,40 55,38" stroke="#7A8B5A" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.38"></path>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Bottom wave divider -->
+  <div class="story-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 L0,28 Q60,18 120,28 T240,24 Q300,30 360,22 T480,26 Q540,20 600,28 T720,22 Q780,28 840,20 T960,26 Q1020,20 1080,28 T1200,22 L1200,60 Z" fill="#F0EAE0"></path>
+      <path d="M0,60 L0,36 Q60,26 120,36 T240,32 Q300,38 360,30 T480,34 Q540,28 600,36 T720,30 Q780,36 840,28 T960,34 Q1020,28 1080,36 T1200,30 L1200,60 Z" fill="#F0EAE0" opacity="0.6"></path>
+    </svg>
+  </div>
+</section>
+
+<section data-band-index="2" class="index-features-section" data-layout-spec="בית-features" dir="rtl">
+  <!-- Decorative tropical leaf accent -->
+  <div class="index-features-leaf-accent" aria-hidden="true">
+    <svg data-no-icon-edit="true" aria-hidden="true" width="140" height="160" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M70,150 C70,150 20,110 15,60 C10,20 50,5 70,30 C90,5 130,20 125,60 C120,110 70,150 70,150 Z" fill="#6BAF92" opacity="0.22"></path>
+      <path d="M70,150 L70,30" stroke="#6BAF92" stroke-width="2" opacity="0.35"></path>
+      <path d="M70,80 C55,65 30,58 20,45" stroke="#6BAF92" stroke-width="1.5" opacity="0.3" fill="none"></path>
+      <path d="M70,95 C85,78 110,70 120,55" stroke="#6BAF92" stroke-width="1.5" opacity="0.3" fill="none"></path>
+      <path d="M70,65 C58,52 40,48 32,38" stroke="#6BAF92" stroke-width="1.2" opacity="0.25" fill="none"></path>
+      <path d="M70,110 C82,95 105,90 115,78" stroke="#6BAF92" stroke-width="1.2" opacity="0.25" fill="none"></path>
+    </svg>
+  </div>
+
+  <div class="index-features-container">
+    <!-- Centered intro block -->
+    <div class="index-features-intro">
+      <span class="index-features-label">מה תמצאו כאן</span>
+      <h2 class="index-features-title">הסיפור שלי מתאילנד 🌴</h2>
+      <p class="index-features-subtitle">אני אביב, בת 9, ואני רוצה לספר לכם על הטיול המשפחתי הכי מדהים שהיה לנו — <strong>טיול משפחתי לתאילנד</strong> שלא אשכח לעולם. כאן תמצאו טיפים, רגעים, והמון השראה!</p>
+    </div>
+
+    <!-- 3-card grid -->
+    <div class="index-features-grid">
+
+      <!-- Card 1: Family travel highlights -->
+      <article class="index-features-card">
+        <div class="index-features-icon-wrap index-features-icon-terracotta">
+          <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5" fill="none"></circle>
+            <path d="M16 8 C16 8 10 13 10 18 C10 21.3 12.7 24 16 24 C19.3 24 22 21.3 22 18 C22 13 16 8 16 8 Z" stroke="currentColor" stroke-width="1.8" fill="none"></path>
+            <path d="M13 18 C13 18 14.5 17 16 18 C17.5 19 19 18 19 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div class="index-features-card-content">
+          <h3 class="index-features-card-title">רגעים שלא שוכחים</h3>
+          <p class="index-features-card-text">מהחוף הלבן בקו סמוי ועד לפיל הענק שפגשנו ביום שלישי — כל יום בתאילנד היה הרפתקה חדשה. אני מספרת על הרגעים הכי מיוחדים שחוויתי עם אמא, אבא ואחי הקטן.</p>
+          <span class="index-features-card-tag">✨ חוויות</span>
+        </div>
+      </article>
+
+      <!-- Card 2: Tips for families -->
+      <article class="index-features-card">
+        <div class="index-features-icon-wrap index-features-icon-olive">
+          <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="6" y="5" width="20" height="24" rx="3" stroke="currentColor" stroke-width="1.8" fill="none"></rect>
+            <path d="M10 11 H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <path d="M10 15.5 H22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <path d="M10 20 H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <circle cx="23" cy="23" r="5" fill="currentColor" opacity="0.15"></circle>
+            <path d="M21 23 L22.5 24.5 L25.5 21.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <div class="index-features-card-content">
+          <h3 class="index-features-card-title">טיפים למשפחות</h3>
+          <p class="index-features-card-text">מה לארוז, איפה לישון, ומה הילדים הכי אוהבים לאכול שם (רמז: מנגו סטיקי רייס!). אספתי את כל הדברים שחשוב לדעת לפני שיוצאים לטיול משפחתי לתאילנד עם ילדים.</p>
+          <span class="index-features-card-tag">📋 טיפים</span>
+        </div>
+      </article>
+
+      <!-- Card 3: Child's perspective storytelling -->
+      <article class="index-features-card">
+        <div class="index-features-icon-wrap index-features-icon-blue">
+          <svg data-element-type="icon" data-icon-type="svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="16" cy="11" r="5" stroke="currentColor" stroke-width="1.8" fill="none"></circle>
+            <path d="M7 27 C7 22 11 19 16 19 C21 19 25 22 25 27" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"></path>
+            <path d="M22 8 C23.5 6.5 26 7 26 9 C26 11 23 12 22 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"></path>
+            <circle cx="25.5" cy="13.5" r="1" fill="currentColor"></circle>
+          </svg>
+        </div>
+        <div class="index-features-card-content">
+          <h3 class="index-features-card-title">מבט של ילדה בת 9</h3>
+          <p class="index-features-card-text">האתר הזה כתוב על ידי — אני! אביב. אני מספרת הכל מהנקודת מבט שלי: מה הפחיד אותי, מה גרם לי לצחוק, ומה גרם לי לבקש לחזור. כי לפעמים הילדים רואים דברים שמבוגרים מפספסים.</p>
+          <span class="index-features-card-tag">💛 הסיפור שלי</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+
+  <!-- Bottom scallop divider to darker section below -->
+  <div class="index-features-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,80 L0,48 Q30,30 60,48 Q90,66 120,48 Q150,30 180,48 Q210,66 240,48 Q270,30 300,48 Q330,66 360,48 Q390,30 420,48 Q450,66 480,48 Q510,30 540,48 Q570,66 600,48 Q630,30 660,48 Q690,66 720,48 Q750,30 780,48 Q810,66 840,48 Q870,30 900,48 Q930,66 960,48 Q990,30 1020,48 Q1050,66 1080,48 Q1110,30 1140,48 Q1170,66 1200,48 L1200,80 Z" fill="var(--bg-dark)" opacity="0.18"></path>
+      <path d="M0,80 L0,56 Q30,40 60,56 Q90,72 120,56 Q150,40 180,56 Q210,72 240,56 Q270,40 300,56 Q330,72 360,56 Q390,40 420,56 Q450,72 480,56 Q510,40 540,56 Q570,72 600,56 Q630,40 660,56 Q690,72 720,56 Q750,40 780,56 Q810,72 840,56 Q870,40 900,56 Q930,72 960,56 Q990,40 1020,56 Q1050,72 1080,56 Q1110,40 1140,56 Q1170,72 1200,56 L1200,80 Z" fill="var(--bg-dark)"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section data-band-index="3" class="index-testimonials-section" data-layout-spec="בית-testimonials" dir="rtl">
+  <div class="index-testimonials-section__container">
+
+    <!-- Section Header -->
+    <div class="index-testimonials-section__header">
+      <span class="index-testimonials-section__eyebrow">מה אומרים עלינו</span>
+      <h2 class="index-testimonials-section__title">משפחות שכבר חוו את הקסם</h2>
+      <p class="index-testimonials-section__subtitle">טיול משפחתי לתאילנד – כפי שמספרים אותו אלה שחיו אותו</p>
+    </div>
+
+    <!-- Staggered Testimonials Grid -->
+    <div class="index-testimonials-section__grid">
+
+      <!-- Primary Large Card (START side) -->
+      <article class="index-testimonials-section__card index-testimonials-section__card--primary">
+        <!-- Passport stamp motif -->
+        <div class="index-testimonials-section__stamp-motif" aria-hidden="true">
+          <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="36" stroke="rgba(201,111,74,0.25)" stroke-width="1.5" stroke-dasharray="4 3"></circle>
+            <circle cx="40" cy="40" r="28" stroke="rgba(201,111,74,0.18)" stroke-width="1"></circle>
+            <text x="40" y="37" text-anchor="middle" font-size="7" fill="rgba(201,111,74,0.35)" font-family="Assistant, sans-serif" font-weight="600">THAILAND</text>
+            <text x="40" y="48" text-anchor="middle" font-size="6" fill="rgba(201,111,74,0.3)" font-family="Assistant, sans-serif">2024</text>
+          </svg>
+        </div>
+
+        <div class="index-testimonials-section__quote-mark" aria-hidden="true">“</div>
+        <blockquote class="index-testimonials-section__quote">
+          <p>כשאביב סיפרה לנו על הרעיון הזה, לא ידענו מה לצפות. אבל האתר שלה הפך את כל הסיפור שלנו מתאילנד לדבר חי ומרגש. כל תמונה, כל משפט – הכל מרגיש כמו ספר ילדים שאנחנו חיינו בעצמנו.</p>
+        </blockquote>
+        <footer class="index-testimonials-section__author">
+          <div class="index-testimonials-section__author-avatar">
+            <span>מ</span>
+          </div>
+          <div class="index-testimonials-section__author-info">
+            <cite class="index-testimonials-section__author-name">משפחת כהן</cite>
+            <span class="index-testimonials-section__author-detail">ביקרו בבנגקוק ופוקט</span>
+          </div>
+          <div class="index-testimonials-section__stars" aria-label="5 כוכבים">
+            <span>★★★★★</span>
+          </div>
+        </footer>
+      </article>
+
+      <!-- Supporting Cards Column (END side) -->
+      <div class="index-testimonials-section__secondary-col">
+
+        <!-- Supporting Card 1 -->
+        <article class="index-testimonials-section__card index-testimonials-section__card--secondary">
+          <div class="index-testimonials-section__stamp-motif index-testimonials-section__stamp-motif--small" aria-hidden="true">
+            <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="30" cy="30" r="26" stroke="rgba(122,139,90,0.25)" stroke-width="1.5" stroke-dasharray="3 2"></circle>
+              <text x="30" y="27" text-anchor="middle" font-size="5.5" fill="rgba(122,139,90,0.35)" font-family="Assistant, sans-serif" font-weight="600">CHIANG MAI</text>
+              <text x="30" y="36" text-anchor="middle" font-size="5" fill="rgba(122,139,90,0.28)" font-family="Assistant, sans-serif">✈</text>
+            </svg>
+          </div>
+          <div class="index-testimonials-section__quote-mark index-testimonials-section__quote-mark--sm" aria-hidden="true">“</div>
+          <blockquote class="index-testimonials-section__quote">
+            <p>הבת שלנו קיבלה השראה מאביב ורצתה גם היא לכתוב על הטיול שלנו. זה הפך לפרויקט משפחתי שלם – כולנו כתבנו, ציירנו, ושיתפנו. כל כך מיוחד!</p>
+          </blockquote>
+          <footer class="index-testimonials-section__author">
+            <div class="index-testimonials-section__author-avatar index-testimonials-section__author-avatar--green">
+              <span>ל</span>
+            </div>
+            <div class="index-testimonials-section__author-info">
+              <cite class="index-testimonials-section__author-name">לירון ויוסי אלון</cite>
+              <span class="index-testimonials-section__author-detail">טיול משפחתי לצפון תאילנד</span>
+            </div>
+            <div class="index-testimonials-section__stars" aria-label="5 כוכבים">
+              <span>★★★★★</span>
+            </div>
+          </footer>
+        </article>
+
+        <!-- Supporting Card 2 -->
+        <article class="index-testimonials-section__card index-testimonials-section__card--secondary">
+          <div class="index-testimonials-section__stamp-motif index-testimonials-section__stamp-motif--small" aria-hidden="true">
+            <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="30" cy="30" r="26" stroke="rgba(111,143,175,0.25)" stroke-width="1.5" stroke-dasharray="3 2"></circle>
+              <text x="30" y="27" text-anchor="middle" font-size="5.5" fill="rgba(111,143,175,0.35)" font-family="Assistant, sans-serif" font-weight="600">KOH SAMUI</text>
+              <text x="30" y="36" text-anchor="middle" font-size="5" fill="rgba(111,143,175,0.28)" font-family="Assistant, sans-serif">🌊</text>
+            </svg>
+          </div>
+          <div class="index-testimonials-section__quote-mark index-testimonials-section__quote-mark--sm" aria-hidden="true">“</div>
+          <blockquote class="index-testimonials-section__quote">
+            <p>קראנו את הסיפורים של אביב לפני שיצאנו לדרך, וזה עזר לנו לראות את תאילנד דרך עיניים של ילדה. הטיול שלנו היה פשוט מושלם – מלא שמחה, הרפתקאות, ורגעים שלא נשכח לעולם.</p>
+          </blockquote>
+          <footer class="index-testimonials-section__author">
+            <div class="index-testimonials-section__author-avatar index-testimonials-section__author-avatar--blue">
+              <span>נ</span>
+            </div>
+            <div class="index-testimonials-section__author-info">
+              <cite class="index-testimonials-section__author-name">נועה ורון שפירא</cite>
+              <span class="index-testimonials-section__author-detail">חופשה עם שלושה ילדים</span>
+            </div>
+            <div class="index-testimonials-section__stars" aria-label="5 כוכבים">
+              <span>★★★★★</span>
+            </div>
+          </footer>
+        </article>
+
+      </div><!-- /.secondary-col -->
+    </div><!-- /.grid -->
+
+  </div><!-- /.container -->
+
+  <!-- Bottom SVG Divider: soft curved fade into CTA -->
+  <div class="index-testimonials-section__divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,90 L0,45 Q150,20 300,38 T600,28 Q750,18 900,35 T1200,30 L1200,90 Z" fill="#F7F3EE"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section data-band-index="4" class="index-cta-section" data-layout-spec="בית-cta" dir="rtl">
+  <div class="index-cta-wrapper">
+    <div class="index-cta-panel">
+      <!-- Directional signpost decoration (aria-hidden) -->
+      <div class="index-cta-signpost" aria-hidden="true">
+        <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 120 200" fill="none" xmlns="http://www.w3.org/2000/svg" width="120" height="200">
+          <rect x="56" y="0" width="8" height="200" rx="4" fill="#C4A882" opacity="0.5"></rect>
+          <rect x="20" y="28" width="80" height="28" rx="5" fill="#C4A882" opacity="0.75"></rect>
+          <polygon points="20,28 10,42 20,56" fill="#C4A882" opacity="0.75"></polygon>
+          <text x="65" y="47" font-family="Assistant, sans-serif" font-size="10" fill="#7A5C3A" text-anchor="middle" opacity="0.9">בנגקוק</text>
+          <rect x="22" y="72" width="78" height="28" rx="5" fill="#A8C5A0" opacity="0.65"></rect>
+          <polygon points="100,72 110,86 100,100" fill="#A8C5A0" opacity="0.65"></polygon>
+          <text x="58" y="91" font-family="Assistant, sans-serif" font-size="10" fill="#3D5A35" text-anchor="middle" opacity="0.9">קוסמוי</text>
+          <rect x="18" y="116" width="84" height="28" rx="5" fill="#C96F4A" opacity="0.55"></rect>
+          <polygon points="18,116 8,130 18,144" fill="#C96F4A" opacity="0.55"></polygon>
+          <text x="62" y="135" font-family="Assistant, sans-serif" font-size="10" fill="#5C2A10" text-anchor="middle" opacity="0.9">צ׳יאנג מאי</text>
+        </svg>
+      </div>
+
+      <!-- Doodle dots decoration -->
+      <div class="index-cta-doodle" aria-hidden="true">
+        <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+          <circle cx="10" cy="10" r="3" fill="#C96F4A" opacity="0.25"></circle>
+          <circle cx="30" cy="10" r="2" fill="#C96F4A" opacity="0.18"></circle>
+          <circle cx="50" cy="10" r="3" fill="#C96F4A" opacity="0.22"></circle>
+          <circle cx="70" cy="10" r="2" fill="#C96F4A" opacity="0.15"></circle>
+          <circle cx="10" cy="30" r="2" fill="#7A8B5A" opacity="0.2"></circle>
+          <circle cx="30" cy="30" r="3" fill="#7A8B5A" opacity="0.15"></circle>
+          <circle cx="50" cy="30" r="2" fill="#C96F4A" opacity="0.2"></circle>
+          <circle cx="70" cy="30" r="3" fill="#7A8B5A" opacity="0.18"></circle>
+          <circle cx="10" cy="50" r="3" fill="#C96F4A" opacity="0.18"></circle>
+          <circle cx="30" cy="50" r="2" fill="#C96F4A" opacity="0.22"></circle>
+          <circle cx="50" cy="50" r="3" fill="#7A8B5A" opacity="0.15"></circle>
+          <circle cx="70" cy="50" r="2" fill="#C96F4A" opacity="0.2"></circle>
+        </svg>
+      </div>
+
+      <!-- Main content -->
+      <div class="index-cta-content">
+        <h2 class="index-cta-heading">רוצים לשמוע עוד על הטיול שלנו?</h2>
+        <p class="index-cta-text">אם גם אתם חולמים על <strong>טיול משפחתי לתאילנד</strong> ורוצים לשאול שאלות, לשמוע סיפורים, או לגלות טיפים ממקור ראשון — אני כאן ושמחה לספר!</p>
+        <a href="/contact" class="index-cta-btn">
+          <span>בואו נדבר</span>
+          <svg data-element-type="icon" data-icon-type="svg" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18" aria-hidden="true">
+            <path d="M15 10H5M9 6l-4 4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </a>
+        <p class="index-cta-sub">אפשר לשאול כל שאלה קטנה או גדולה — אני אענה בשמחה 🌺</p>
+      </div>
+
+      <!-- Decorative image tile peeking from bottom-end corner -->
+      <div class="index-cta-tile-wrapper">
+        <img loading="lazy" decoding="async" data-placeholder="index-cta-image-1" data-context="A small square tile showing a cheerful 9-year-old girl on a tropical Thai beach at golden hour, wearing a colorful sundress, with turquoise water and palm trees in the background. Warm, joyful, family travel photography style with a scrapbook feel." width="180" height="180" src="/assets/site-index-cta-image-1.webp" alt="אביב על חוף הים בתאילנד" class="index-cta-tile-img">
+      </div>
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer" dir="rtl" aria-label="כותרת תחתונה של האתר">
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <!-- Column 1: Company Info -->
+      <div class="footer-col footer-brand">
+        <img src="/assets/general-logo.webp" alt="הסיפור שלי בתאילנד" class="logo">
+        <p class="footer-tagline">מסע משפחתי בין גלים, ג'ונגלים ורגעים שלא נשכחים — הסיפור שלנו מתאילנד, ישירות אליך.</p>
+        <div class="footer-social" aria-label="רשתות חברתיות">
+          
+          
+          
+        </div>
+      </div>
+
+      <!-- Column 2: Quick Links -->
+      <div class="footer-col footer-links">
+        <h3 class="footer-heading">ניווט מהיר</h3>
+        <ul class="footer-nav-list">
+          <li><a href="/">בית</a></li>
+          <li><a href="/stories-highlights">סיפורים ורגעים</a></li>
+          <li><a href="/about">אודות הסיפור</a></li>
+          <li><a href="/contact">צור קשר</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Contact -->
+      <div class="footer-col footer-contact-col">
+        <h3 class="footer-heading">יצירת קשר</h3>
+        <ul class="footer-contact">
+          <li>
+            <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+            <span class="contact-text"><a href="mailto:[business_email]">[business_email]</a></span>
+          </li>
+          <li>
+            <span class="contact-icon"><i class="fas fa-phone"></i></span>
+            <span class="contact-text"><a href="tel:[business_phone]">[business_phone]</a></span>
+          </li>
+          <li><a href="/"><span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+            <span class="contact-text">[business_address]</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Badge / Extra -->
+      <div class="footer-col footer-extras">
+        <h3 class="footer-heading">על הפרויקט</h3>
+        <div class="footer-badge"><i class="fas fa-heart"></i> סיפור אמיתי, לב שלם</div>
+        <div class="footer-badge"><i class="fas fa-camera-retro"></i> תמונות ורגעים אותנטיים</div>
+        <div class="footer-badge"><i class="fas fa-map"></i> מדריך משפחתי לתאילנד</div>
+        <div class="footer-badge"><i class="fas fa-comments"></i> שאלות? אנחנו כאן בשבילך</div>
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2026 הסיפור שלי בתאילנד. כל הזכויות שמורות.</p>
+      <div class="footer-legal">
+        <a href="/privacy">מדיניות פרטיות</a>
+        <span class="footer-legal-sep">·</span>
+        <a href="/terms">תנאי שימוש</a>
+        <span class="footer-legal-sep">·</span>
+        <a href="/accessibility">נגישות</a>
+        <span class="footer-legal-sep">·</span>
+        <a href="https://zappy5.com" target="_blank" class="zappy-attribution">נוצר באמצעות Zappy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <div data-integration="accessibility:toolbar"></div>
+
+    <script src="/script.js"></script>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body>
+</html>
