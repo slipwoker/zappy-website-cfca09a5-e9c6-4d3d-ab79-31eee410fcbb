@@ -70,16 +70,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&family=Assistant:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary: #C96F4A;
-  --secondary: #6F8FAF;
-  --accent: #7A8B5A;
-  --bg-light: #F3E8D7;
+--primary: #B5007A;
+  --secondary: #3D5068;
+  --accent: #FF6B00;
+  --bg-light: #FFFFFF;
   --bg-dark: #2E2A26;
-  --text-dark: #2E2A26;
+  --text-dark: #4a4a4a;
   --text-light: #F8F4EE;
-  --text-muted: #7D736A;
-  --border-light: #E3D4C2;
-  --border-dark: #4A433D;
+  --text-muted: #656565;
+  --border-light: #887f74;
+  --border-dark: #7d7670;
   --nav-bg: #F3E8D7;
   --nav-text: #2E2A26;
   --nav-text-hover: #C96F4A;
@@ -102,14 +102,21 @@
   --transition-default: all 0.25s ease;
   --transition-hover: all 0.2s ease;
 
-  --gradient-primary: linear-gradient(135deg, #E07A5F 0%, #C4705A 100%);
+  --gradient-primary: linear-gradient(135deg, #E10098 0%, #C00081 100%);
   --gradient-gold-shine: linear-gradient(90deg, #F2C94C 0%, #F2A65A 50%, #F2C94C 100%);
-  --gradient-secondary: linear-gradient(135deg, #4A90A4 0%, #357A8A 100%);
-  --gradient-gold-accent: linear-gradient(135deg, #F2A65A 0%, #E07A5F 100%);
-  --gradient-dark-section: linear-gradient(180deg, #C4705A 0%, #A85A45 100%);
+  --gradient-secondary: linear-gradient(135deg, #2B394A 0%, #1A222C 100%);
+  --gradient-gold-accent: linear-gradient(135deg, #EE00A0 0%, #E10098 100%);
+  --gradient-dark-section: linear-gradient(180deg, #C00081 0%, #8F0060 100%);
   --gradient-overlay-dark: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);
   --gradient-light-section: linear-gradient(180deg, #FAF7F2 0%, #F0EAE0 100%);
   --gradient-overlay-light: linear-gradient(to bottom, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.85) 100%);
+  --primary-color: #B5007A;
+  --secondary-color: #3D5068;
+  --accent-color: #FF6B00;
+  --background-color: #FFFFFF;
+  --surface-color: #F7F2F6;
+  --text-color: #4a4a4a;
+  --text-secondary-color: #656565;
 }
 
 *,
@@ -382,8 +389,8 @@ pre {
 }
 
 .btn-primary:hover {
-  background: #b5613f;
-  border-color: #b5613f;
+  background: #B5007A;
+  border-color: #B5007A;
   color: var(--text-light);
 }
 
@@ -394,8 +401,8 @@ pre {
 }
 
 .btn-secondary:hover {
-  background: #5d7d9e;
-  border-color: #5d7d9e;
+  background: #3D5068;
+  border-color: #3D5068;
   color: var(--text-light);
 }
 
@@ -417,8 +424,8 @@ pre {
 }
 
 .btn-accent:hover {
-  background: #697a4d;
-  border-color: #697a4d;
+  background: #FF6B00;
+  border-color: #FF6B00;
   color: var(--text-light);
 }
 
@@ -433,7 +440,7 @@ pre {
 }
 
 .card {
-  background: #ffffff;
+  background: #F7F2F6;
   border-radius: var(--radius-card);
   padding: var(--spacing-card-padding);
   box-shadow: var(--shadow-card);
@@ -491,7 +498,7 @@ select {
   padding: 12px 16px;
   border-radius: var(--radius-input);
   border: 1px solid var(--border-light);
-  background: #ffffff;
+  background: #FFFFFF;
   color: var(--text-dark);
   font-size: 16px;
   font-family: 'Rubik', sans-serif;
@@ -531,7 +538,7 @@ textarea {
 .bg-accent { background-color: var(--accent) !important; }
 .bg-light { background-color: var(--bg-light) !important; }
 .bg-dark { background-color: var(--bg-dark) !important; }
-.bg-white { background-color: #ffffff !important; }
+.bg-white { background-color: #FFFFFF !important; }
 
 .bg-gradient-primary { background: var(--gradient-primary) !important; }
 .bg-gradient-secondary { background: var(--gradient-secondary) !important; }
@@ -737,16 +744,16 @@ html:not([dir]) .whatsapp-float {
   --nav-bg: #F3E8D7;
   --nav-text: #2E2A26;
   --nav-text-hover: #C96F4A;
-  --primary: #C96F4A;
-  --secondary: #6F8FAF;
-  --accent: #7A8B5A;
-  --bg-light: #F3E8D7;
+  --primary: #B5007A;
+  --secondary: #3D5068;
+  --accent: #FF6B00;
+  --bg-light: #FFFFFF;
   --bg-dark: #2E2A26;
-  --text-dark: #2E2A26;
+  --text-dark: #4a4a4a;
   --text-light: #F8F4EE;
-  --text-muted: #7D736A;
-  --border-light: #E3D4C2;
-  --border-dark: #4A433D;
+  --text-muted: #656565;
+  --border-light: #887f74;
+  --border-dark: #7d7670;
 }
 
 .navbar {
@@ -870,7 +877,7 @@ html:not([dir]) .whatsapp-float {
 }
 
 .nav-cta-btn:hover {
-  background-color: #b85e3a;
+  background-color: #B5007A;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14);
   transform: translateY(-1px);
 }
@@ -978,16 +985,16 @@ html:not([dir]) .whatsapp-float {
   --nav-bg: #F3E8D7;
   --nav-text: #2E2A26;
   --nav-text-hover: #C96F4A;
-  --primary: #C96F4A;
-  --secondary: #6F8FAF;
-  --accent: #7A8B5A;
-  --bg-light: #F3E8D7;
+  --primary: #B5007A;
+  --secondary: #3D5068;
+  --accent: #FF6B00;
+  --bg-light: #FFFFFF;
   --bg-dark: #2E2A26;
-  --text-dark: #2E2A26;
+  --text-dark: #4a4a4a;
   --text-light: #F8F4EE;
-  --text-muted: #7D736A;
-  --border-light: #E3D4C2;
-  --border-dark: #4A433D;
+  --text-muted: #656565;
+  --border-light: #887f74;
+  --border-dark: #7d7670;
 }
 
 .navbar {
@@ -1111,7 +1118,7 @@ html:not([dir]) .whatsapp-float {
 }
 
 .nav-cta-btn:hover {
-  background-color: #b85e3a;
+  background-color: #B5007A;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14);
   transform: translateY(-1px);
 }
@@ -1285,7 +1292,7 @@ html:not([dir]) .whatsapp-float {
 .navbar a:focus-visible,
 .navbar button:focus-visible,
 .nav-menu a:focus-visible {
-  outline: 2px solid var(--primary-color, var(--primary, #C96F4A));
+  outline: 2px solid var(--primary-color, var(--primary, #B5007A));
   outline-offset: 2px;
 }
 
@@ -2153,14 +2160,14 @@ main:not(.courses-page-main) { margin-top: 0 !important; padding-top: 0 !importa
 
 /* Footer Styles */
 .site-footer {
-  --primary: #C96F4A;
-  --secondary: #6F8FAF;
-  --accent: #7A8B5A;
+  --primary: #B5007A;
+  --secondary: #3D5068;
+  --accent: #FF6B00;
   --bg-dark: #2E2A26;
   --bg-darker: #231F1B;
   --text-light: #F8F4EE;
   --text-muted-light: rgba(248, 244, 238, 0.65);
-  --border-dark: #4A433D;
+  --border-dark: #7d7670;
   --radius-card: 16px;
   --radius-btn: 24px;
   --shadow: 0 8px 30px rgba(0,0,0,0.14);
@@ -2500,7 +2507,7 @@ main:not(.courses-page-main) { margin-top: 0 !important; padding-top: 0 !importa
 
 
 /* V2 Decorative Helpers — quote marks */
-:root { --decorative-quote-color: var(--accent, #b48b59); --decorative-quote-font: var(--accent-font, var(--font-display, serif)); }
+:root { --decorative-quote-color: var(--accent, #B5007A); --decorative-quote-font: var(--accent-font, var(--font-display, serif)); }
 blockquote::before, .quote::before, [data-quote]::before {
   content: "\201C";
   font-family: var(--decorative-quote-font);
@@ -2531,7 +2538,7 @@ hr.section-flourish, .section-flourish, [data-section-divider] {
   height: 2px;
   margin: 1.25rem auto;
   border: 0;
-  background: linear-gradient(90deg, transparent, var(--accent, var(--primary, #b48b59)) 30%, var(--accent, var(--primary, #b48b59)) 70%, transparent);
+  background: linear-gradient(90deg, transparent, var(--accent, var(--primary, #AF0076)) 30%, var(--accent, var(--primary, #AF0076)) 70%, transparent);
   border-radius: 999px;
   opacity: 0.85;
 }
@@ -2752,7 +2759,7 @@ html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
 }
 
 .index-hero-section .index-hero-btn-primary:hover {
-  background: #b55c38;
+  background: #B5007A;
   box-shadow: 0 12px 40px rgba(201,111,74,0.38);
   transform: translateY(-2px);
 }
@@ -3634,7 +3641,7 @@ html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary) 0%, #A85A45 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, #8F0060 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3647,7 +3654,7 @@ html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
 }
 
 .index-testimonials-section__author-avatar--green {
-  background: linear-gradient(135deg, var(--accent) 0%, #5A7040 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, #CA5500 100%);
   box-shadow: 0 4px 12px rgba(122,139,90,0.3);
 }
 
@@ -3684,7 +3691,7 @@ html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
 
 /* ── Stars ── */
 .index-testimonials-section__stars {
-  color: #F2A65A;
+  color: #B5007A;
   font-size: 0.85rem;
   letter-spacing: 1px;
   flex-shrink: 0;
@@ -3902,7 +3909,7 @@ html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
 }
 
 .index-cta-section .index-cta-btn:hover {
-  background: #b85e3a;
+  background: #B5007A;
   box-shadow: 0 8px 30px rgba(0,0,0,0.14);
   transform: translateY(-2px);
 }
@@ -5881,7 +5888,7 @@ html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary) 0%, #A85A45 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, #8F0060 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5917,7 +5924,7 @@ html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
 
 .about-reviews-section .about-reviews-stars {
   font-size: 1rem;
-  color: #F2A65A;
+  color: #ff6ed0;
   letter-spacing: 2px;
   text-align: right;
 }
@@ -6307,7 +6314,7 @@ html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
 }
 
 .contact-contact-form-section .ccf-submit-btn:hover {
-  background: #B85F3C;
+  background: #B5007A;
   box-shadow: 0 8px 30px rgba(201,111,74,0.45);
   transform: translateY(-2px);
 }
@@ -6817,7 +6824,7 @@ html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
 }
 
 .contact-closing-note-section .ccn-btn-primary:hover {
-  background: #b8603e;
+  background: #B5007A;
   box-shadow: 0 12px 40px rgba(201,111,74,0.35);
   transform: translateY(-2px);
   color: #FFFFFF;
@@ -7295,11 +7302,11 @@ html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
   --cc-modal-bg: #ffffff;
   --cc-primary-color: #1f2937;
   --cc-secondary-color: #4b5563;
-  --cc-btn-primary-bg: #c96f4a;
+  --cc-btn-primary-bg: #B5007A;
   --cc-btn-primary-color: #ffffff;
-  --cc-btn-primary-border: #c96f4a;
-  --cc-btn-primary-hover-bg: #b05631;
-  --cc-btn-primary-hover-border: #b05631;
+  --cc-btn-primary-border: #B5007A;
+  --cc-btn-primary-hover-bg: #B5007A;
+  --cc-btn-primary-hover-border: #B5007A;
   --cc-btn-primary-hover-color: #ffffff;
   /* --cc-btn-secondary-* are used by BOTH the bar's "Customize" link and
    * the preferences modal's "Accept Necessary" / "Save Preferences" pills.
@@ -7313,7 +7320,7 @@ html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
   --cc-btn-secondary-hover-bg: #e5e7eb;
   --cc-btn-secondary-hover-color: #111827;
   --cc-btn-secondary-hover-border: #d1d5db;
-  --cc-toggle-on-bg: #c96f4a;
+  --cc-toggle-on-bg: #B5007A;
 }
 
 #cc-main,
@@ -7426,7 +7433,7 @@ html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
  * defaults for the preferences modal's two secondary pills). */
 #zappy-cookie-banner .zappy-cookie-banner__button--customize {
   background-color: transparent !important;
-  color: #c96f4a !important;
+  color: #B5007A !important;
   border: none !important;
   padding: 0 8px !important;
   height: 32px !important;
@@ -7436,7 +7443,7 @@ html[dir="rtl"] .footer-contact li > a { flex-direction: row !important; }
 }
 
 #zappy-cookie-banner .zappy-cookie-banner__button--customize:hover {
-  color: #b05631 !important;
+  color: #B5007A !important;
   background-color: transparent !important;
 }
 
@@ -7818,6 +7825,15 @@ div[id*="mic-access-tool-box"] button[class*="reset"] * {
 ._access-icon {
   display: flex !important;
 }
+/* === BUTTON TEXT OVERRIDES START === */
+.btn-accent,
+.btn--accent,
+[class*="btn-accent"],
+[class*="btn--accent"] { color: #333333 !important; }
+.navbar .nav-cta-btn,
+.nav-cta-btn { color: #FFFFFF !important; }
+/* === BUTTON TEXT OVERRIDES END === */
+
 /* mobile-submenu-overflow-fix */
 @media (max-width: 768px) {
   .navbar .sub-menu.mobile-expanded,
